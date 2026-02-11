@@ -1,0 +1,19 @@
+services:
+  postgresml:
+    image: ghcr.io/postgresml/postgresml:2.10.0
+    container_name: postgresml
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+      - "8000:8000"
+    volumes:
+      - postgresml_data:/var/lib/postgresql
+      - ./db/users.sql:/docker-entrypoint-initdb.d/01-users.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgresml -d postgresml"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  postgresml_data:
