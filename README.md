@@ -24,9 +24,9 @@ export OPENAI_API_KEY=your-dashscope-api-key
 ## 测试
 
 ```bash
-# 查询可领养的狗狗
-curl "http://localhost:8080/alice/assistant?question=我想领养一只金毛"
+# Search for adoptable dogs
+curl -G "http://localhost:8080/alice/assistant" --data-urlencode "question=I want to adopt a Golden Retriever"
 
-# 预约领养
-curl "http://localhost:8080/alice/assistant?question=我想预约领养Buddy"
+# Schedule an appointment
+curl -G "http://localhost:8080/alice/assistant" --data-urlencode "question=I want to schedule an appointment to adopt Buddy"
 ```

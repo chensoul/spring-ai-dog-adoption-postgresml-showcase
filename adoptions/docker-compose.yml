@@ -1,4 +1,15 @@
 services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    container_name: postgres
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+
   postgresml:
     image: ghcr.io/postgresml/postgresml:2.10.0
     container_name: postgresml
@@ -8,7 +19,6 @@ services:
       - "8000:8000"
     volumes:
       - postgresml_data:/var/lib/postgresql
-      - ./db/users.sql:/docker-entrypoint-initdb.d/01-users.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgresml -d postgresml"]
       interval: 5s

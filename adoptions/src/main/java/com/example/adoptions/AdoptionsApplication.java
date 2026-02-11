@@ -67,7 +67,6 @@ class AdoptionsController {
     private final ChatClient ai;
 
     AdoptionsController(JdbcClient db,
-
                         McpSyncClient mcpSyncClient,
                         PromptChatMemoryAdvisor promptChatMemoryAdvisor,
                         ChatClient.Builder ai,
